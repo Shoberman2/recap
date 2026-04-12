@@ -7,18 +7,29 @@ Built for [Claude Code](https://claude.ai/code). Type `/recap` and Claude tells 
 ## Install
 
 ```bash
-npm install -g recap-cli
+git clone https://github.com/Shoberman2/recap.git ~/recap
+cd ~/recap
+npm install
+npm run build
 ```
+
+Then add the slash commands to your global Claude Code instructions:
+
+```bash
+cat ~/recap/CLAUDE.md >> ~/.claude/CLAUDE.md
+```
+
+That registers `/recap`, `/recap-week`, `/recap-month`, `/recap-year`, and `/recap-all` as slash commands in every Claude Code session.
 
 ## Setup
 
 ```bash
-recap init
+npx tsx ~/recap/src/cli.ts init
 ```
 
 This scans your machine for git repos and detects your author email. Config is saved to `~/.config/recap/config.json`.
 
-By default, recap scans `~`, `~/repos`, `~/src`, `~/code`, `~/projects`, and `~/Developer`.
+By default, recap scans `~`, `~/repos`, `~/src`, `~/code`, `~/projects`, and `~/Developer`. Edit the config to add your own directories.
 
 ## Usage
 
@@ -37,11 +48,11 @@ Claude reads the output and gives you a personal narrative of what you built.
 ### From the terminal
 
 ```bash
-recap          # full overview
-recap week     # this week
-recap month    # this month
-recap year     # this year
-recap all      # all time
+npx tsx ~/recap/src/cli.ts          # full overview
+npx tsx ~/recap/src/cli.ts week     # this week
+npx tsx ~/recap/src/cli.ts month    # this month
+npx tsx ~/recap/src/cli.ts year     # this year
+npx tsx ~/recap/src/cli.ts all      # all time
 ```
 
 ## How it works
