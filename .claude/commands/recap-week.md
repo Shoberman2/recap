@@ -1,0 +1,1 @@
+Run `npx tsx ~/recap/src/cli.ts week` and read the output. Give the user a narrative of their week.

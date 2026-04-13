@@ -1,0 +1,1 @@
+Run `npx tsx ~/recap/src/cli.ts year` and read the output. Give the user a narrative of their year — arcs, phases, what they've become as a builder.
