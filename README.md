@@ -1,10 +1,22 @@
-# recap
+# Recap
 
-Recap everything you've built on your laptop. Scans all your git repos and shows what you shipped — today, this week, this month, this year, and all time.
+A developer diary that writes itself. Scans every git repo on your machine and tells you what you shipped — today, this week, this month, this year, and all time. No dashboards, no manual logging... just your git history turned into a personal narrative.
 
-Built for [Claude Code](https://claude.ai/code). Type `/recap` and Claude tells you what you've been building.
+Built for [Claude Code](https://claude.ai/code). Type `/recap` in your terminal and Claude tells you what you've been building.
+
+## Prerequisites
+
+Install Claude Code: https://docs.anthropic.com/en/docs/claude-code/getting-started
 
 ## Install
+
+Install globally via npm:
+
+```bash
+npm install -g recap-cli
+```
+
+**Or** clone the repo:
 
 ```bash
 git clone https://github.com/Shoberman2/recap.git ~/recap
@@ -19,64 +31,22 @@ Then add the slash commands to your global Claude Code instructions:
 cat ~/recap/CLAUDE.md >> ~/.claude/CLAUDE.md
 ```
 
-That registers `/recap`, `/recap-week`, `/recap-month`, `/recap-year`, and `/recap-all` as slash commands in every Claude Code session.
+## Commands
 
-## Setup
-
-```bash
-npx tsx ~/recap/src/cli.ts init
-```
-
-This scans your machine for git repos and detects your author email. Config is saved to `~/.config/recap/config.json`.
-
-By default, recap scans `~`, `~/repos`, `~/src`, `~/code`, `~/projects`, and `~/Developer`. Edit the config to add your own directories.
-
-## Usage
-
-### In Claude Code
-
-Just type any of these slash commands:
-
-- `/recap` — full overview: today, week, month, year, all time
-- `/recap-week` — this week with commit details
-- `/recap-month` — this month with commit details
-- `/recap-year` — this year stats
-- `/recap-all` — all time stats
-
-Claude reads the output and gives you a personal narrative of what you built.
-
-### From the terminal
-
-```bash
-npx tsx ~/recap/src/cli.ts          # full overview
-npx tsx ~/recap/src/cli.ts week     # this week
-npx tsx ~/recap/src/cli.ts month    # this month
-npx tsx ~/recap/src/cli.ts year     # this year
-npx tsx ~/recap/src/cli.ts all      # all time
-```
+| Command | What it does |
+|---------|-------------|
+| `/recap` | Full overview — today, week, month, year, all time |
+| `/recap-week` | This week's commits with details |
+| `/recap-month` | This month's themes and biggest projects |
+| `/recap-year` | This year's stats and arcs |
+| `/recap-all` | Your entire coding history on this machine |
 
 ## How it works
 
-1. **Discover** — scans your filesystem for git repos
-2. **Extract** — reads `git log` for each repo in the time period
-3. **Analyze** — computes stats, streaks, highlights
-4. **Render** — outputs structured text that Claude (or you) can read
+Recap discovers git repos across your filesystem, reads `git log` for each one, computes stats and streaks, and outputs structured text that Claude turns into a warm, personal narrative. No data leaves your machine. No API keys needed. Everything runs locally.
 
-No data leaves your machine. No API keys needed. Everything runs locally against your git history.
+## Upcoming
 
-## Config
-
-Edit `~/.config/recap/config.json`:
-
-```json
-{
-  "scan_dirs": ["~", "~/code", "~/projects"],
-  "scan_max_depth": 4,
-  "ignore_patterns": ["node_modules", ".cache", "vendor"],
-  "author_emails": ["you@example.com"]
-}
-```
-
-## License
-
-MIT
+- **`recap story`** — developer origin story. Reads your lifetime git history and generates a narrative of your evolution as a builder.
+- **`recap diff 2023 2024`** — year-over-year comparison. Compare languages, repos, commit frequency, and see what changed.
+- **Homebrew tap** — `brew install recap` for a more natural macOS install path.
