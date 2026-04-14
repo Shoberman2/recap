@@ -18,6 +18,7 @@ export interface CommitData {
   insertions: number;
   deletions: number;
   repo: string;
+  files?: FileStats[];
 }
 
 export interface FileStats {

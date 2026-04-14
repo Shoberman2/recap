@@ -19,6 +19,12 @@ Run `npm run dev -- year` and read the output. Give the user a narrative of thei
 ### /recap-all
 Run `npm run dev -- all` and read the output. Give the user a narrative of their entire coding history on this machine.
 
+### /recap-story
+Run `npm run dev -- story` and read the output. Give the user a narrative of their entire developer journey — the eras, the evolution, the milestones. Make it feel like reading your own origin story.
+
+### /recap-diff
+Run `npm run dev -- diff $ARGUMENTS` and read the output. Give the user a narrative comparing the two time periods — what changed, what grew, what they left behind. If no arguments provided, ask the user which two periods to compare.
+
 ## Skill routing
 
 When the user's request matches an available skill, ALWAYS invoke it using the Skill

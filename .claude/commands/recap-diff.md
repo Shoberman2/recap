@@ -1,0 +1,1 @@
+Run `npm run dev -- diff $ARGUMENTS` and read the output. Give the user a narrative comparing the two time periods — what changed, what grew, what they left behind. If no arguments provided, ask the user which two periods to compare (e.g., "2024 2025" for years, "q1 q2" for quarters).

@@ -1,5 +1,5 @@
 import { execSync } from "node:child_process";
-import type { CommitData, DateRange, RepoInfo } from "./types.js";
+import type { CommitData, DateRange, FileStats, RepoInfo } from "./types.js";
 
 const FIELD_SEP = "\x1f"; // Unit Separator between fields
 const COMMIT_SEP = "\x1e"; // Record Separator between commits
@@ -15,6 +15,7 @@ export function extractCommits(
   repo: RepoInfo,
   period: DateRange,
   authorEmails: string[],
+  timeout = 10000,
 ): CommitData[] {
   const commits: CommitData[] = [];
 
@@ -33,7 +34,7 @@ export function extractCommits(
 
       const output = execSync(args.join(" "), {
         cwd: repo.path,
-        timeout: 10000,
+        timeout,
         encoding: "utf-8",
         maxBuffer: 10 * 1024 * 1024, // 10MB
         stdio: ["pipe", "pipe", "pipe"],
@@ -77,6 +78,7 @@ export function parseGitLog(output: string, repoName: string): CommitData[] {
     let insertions = 0;
     let deletions = 0;
     let filesChanged = 0;
+    const files: FileStats[] = [];
 
     for (let i = 1; i < lines.length; i++) {
       const line = lines[i].trim();
@@ -89,6 +91,7 @@ export function parseGitLog(output: string, repoName: string): CommitData[] {
         const del = numstatMatch[2] === "-" ? 0 : parseInt(numstatMatch[2], 10);
         insertions += ins;
         deletions += del;
+        files.push({ path: numstatMatch[3], insertions: ins, deletions: del });
       }
     }
 
@@ -101,6 +104,7 @@ export function parseGitLog(output: string, repoName: string): CommitData[] {
       insertions,
       deletions,
       repo: repoName,
+      files,
     });
   }
 

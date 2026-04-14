@@ -28,7 +28,7 @@ const EXTENSION_MAP: Record<string, string> = {
   ".svelte": "Svelte",
 };
 
-function detectLanguage(filePath: string): string {
+export function detectLanguage(filePath: string): string {
   const lower = filePath.toLowerCase();
   if (lower === "dockerfile" || lower.endsWith("/dockerfile")) return "Docker";
 
@@ -48,7 +48,21 @@ function computeRepoStats(commits: CommitData[], repoName: string): RepoStats {
   for (const commit of commits) {
     linesAdded += commit.insertions;
     linesRemoved += commit.deletions;
+
+    if (commit.files) {
+      for (const file of commit.files) {
+        const lang = detectLanguage(file.path);
+        languages[lang] = (languages[lang] || 0) + file.insertions;
+        fileCounts[file.path] = (fileCounts[file.path] || 0) + 1;
+      }
+    }
   }
+
+  // Top 5 most-changed files
+  const topFiles = Object.entries(fileCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([path]) => path);
 
   return {
     repo: repoName,
@@ -56,16 +70,20 @@ function computeRepoStats(commits: CommitData[], repoName: string): RepoStats {
     linesAdded,
     linesRemoved,
     languages,
-    topFiles: [],
+    topFiles,
   };
 }
 
-function computeLanguages(commits: CommitData[]): Record<string, number> {
-  // We don't have per-file data in CommitData, only aggregate insertions.
-  // Language detection requires file-level data from numstat.
-  // For now, we'll track at the repo level based on file extensions in commit data.
-  // This is a simplification — we can enhance later with file-level tracking.
-  return {};
+export function computeLanguages(commits: CommitData[]): Record<string, number> {
+  const languages: Record<string, number> = {};
+  for (const commit of commits) {
+    if (!commit.files) continue;
+    for (const file of commit.files) {
+      const lang = detectLanguage(file.path);
+      languages[lang] = (languages[lang] || 0) + file.insertions;
+    }
+  }
+  return languages;
 }
 
 export function analyze(commits: CommitData[], period: DateRange): RecapData {
@@ -171,7 +189,7 @@ export function analyze(commits: CommitData[], period: DateRange): RecapData {
   const sortedCommits = [...commits].sort(
     (a, b) => b.date.getTime() - a.date.getTime()
   );
-  const cappedCommits = sortedCommits.slice(0, 500);
+  const cappedCommits = sortedCommits.slice(0, 1000);
   const commitMessages = cappedCommits.map(
     (c) => `[${c.repo}] ${c.message}`
   );

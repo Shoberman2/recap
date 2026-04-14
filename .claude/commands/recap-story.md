@@ -1,0 +1,1 @@
+Run `npm run dev -- story` and read the output. Give the user a narrative of their entire developer journey — the eras, the evolution, the milestones. Make it feel like reading your own origin story.
