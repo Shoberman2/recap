@@ -1,1 +1,1 @@
-Run `npx tsx ~/recap/src/cli.ts month` and read the output. Give the user a narrative of their month — themes, biggest projects, how focus shifted.
+Run `npm run dev -- month` and read the output. Give the user a narrative of their month — themes, biggest projects, how focus shifted.

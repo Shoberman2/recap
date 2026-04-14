@@ -1,1 +1,1 @@
-Run `npx tsx ~/recap/src/cli.ts` and read the output. Then give the user a warm, personal narrative — what they built, what stood out, and the overall vibe across each time period. Be specific, reference actual projects and commits, don't just repeat stats.
+Run `npm run dev` and read the output. Then give the user a warm, personal narrative — what they built, what stood out, and the overall vibe across each time period. Be specific, reference actual projects and commits, don't just repeat stats.
