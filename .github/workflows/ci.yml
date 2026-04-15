@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate command files exist
+        run: |
+          echo "Checking command files..."
+          for cmd in recap recap-week recap-month recap-year recap-all recap-story recap-diff recap-session; do
+            if [ ! -f ".claude/commands/${cmd}.md" ]; then
+              echo "MISSING: .claude/commands/${cmd}.md"
+              exit 1
+            fi
+            echo "OK: ${cmd}.md"
+          done
+
+      - name: Validate command files contain required sections
+        run: |
+          for f in .claude/commands/recap*.md; do
+            if ! grep -q "git log" "$f" && ! grep -q "git" "$f"; then
+              echo "WARNING: $f may not contain git commands"
+            fi
+            echo "VALID: $f"
+          done
+
+      - name: Check README is up to date
+        run: |
+          for cmd in recap recap-week recap-month recap-year recap-all recap-story recap-diff recap-session; do
+            if ! grep -q "$cmd" README.md; then
+              echo "WARNING: $cmd not mentioned in README.md"
+            fi
+          done

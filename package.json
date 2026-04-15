@@ -1,0 +1,22 @@
+{
+  "name": "recap-claude",
+  "version": "1.0.0",
+  "description": "Slash commands for Claude Code that recap everything you've built on your laptop",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shoberman2/recap.git"
+  },
+  "keywords": [
+    "claude-code",
+    "claude",
+    "ai",
+    "developer-tools",
+    "git",
+    "productivity",
+    "recap",
+    "slash-commands"
+  ],
+  "author": "shoberman",
+  "homepage": "https://github.com/Shoberman2/recap"
+}

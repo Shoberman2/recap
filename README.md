@@ -1,17 +1,20 @@
 # recap
 
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![CI](https://github.com/Shoberman2/recap/actions/workflows/ci.yml/badge.svg)](https://github.com/Shoberman2/recap/actions/workflows/ci.yml)
+[![Works with Claude Code](https://img.shields.io/badge/works%20with-Claude%20Code-blueviolet)](https://claude.ai/code)
+
 Slash commands for [Claude Code](https://claude.ai/code) that recap everything you've built on your laptop. Type `/recap` and Claude scans your git repos and tells you what you shipped.
 
 No CLI to install. No dependencies. No API keys. Just copy the commands.
 
+<!-- Add a demo GIF here — record yourself running /recap in Claude Code -->
+<!-- ![demo](assets/demo.gif) -->
+
 ## Install
 
 ```bash
-# Clone the repo
-git clone https://github.com/Shoberman2/recap.git
-
-# Copy the commands to your Claude Code config
-cp recap/.claude/commands/recap*.md ~/.claude/commands/
+git clone https://github.com/Shoberman2/recap.git ~/recap && cp ~/recap/.claude/commands/recap*.md ~/.claude/commands/
 ```
 
 That's it. Open Claude Code and type `/recap`.
@@ -37,6 +40,16 @@ Each command tells Claude to run `git log` across all repos on your machine, the
 - Filters by your `git config user.email`
 - Skips `node_modules`, `.cache`, `vendor`, `Library`
 - Everything runs locally. Nothing leaves your machine.
+
+## Share your recap
+
+Run `/recap-story` and post a screenshot — we'd love to see what you've built.
+
+Tag **#devrecap** on Twitter/X.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for ideas and guidelines.
 
 ## License
 
