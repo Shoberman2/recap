@@ -1,52 +1,42 @@
-# Recap
+# recap
 
-A developer diary that writes itself. Scans every git repo on your machine and tells you what you shipped — today, this week, this month, this year, and all time. No dashboards, no manual logging... just your git history turned into a personal narrative.
+Slash commands for [Claude Code](https://claude.ai/code) that recap everything you've built on your laptop. Type `/recap` and Claude scans your git repos and tells you what you shipped.
 
-Built for [Claude Code](https://claude.ai/code). Type `/recap` in your terminal and Claude tells you what you've been building.
-
-## Prerequisites
-
-Install Claude Code: https://docs.anthropic.com/en/docs/claude-code/getting-started
+No CLI to install. No dependencies. No API keys. Just copy the commands.
 
 ## Install
 
-Install globally via npm:
-
 ```bash
-npm install -g recap-cli
+# Clone the repo
+git clone https://github.com/Shoberman2/recap.git
+
+# Copy the commands to your Claude Code config
+cp recap/.claude/commands/recap*.md ~/.claude/commands/
 ```
 
-**Or** clone the repo:
-
-```bash
-git clone https://github.com/Shoberman2/recap.git ~/recap
-cd ~/recap
-npm install
-npm run build
-```
-
-Then add the slash commands to your global Claude Code instructions:
-
-```bash
-cat ~/recap/CLAUDE.md >> ~/.claude/CLAUDE.md
-```
+That's it. Open Claude Code and type `/recap`.
 
 ## Commands
 
 | Command | What it does |
 |---------|-------------|
-| `/recap` | Full overview — today, week, month, year, all time |
-| `/recap-week` | This week's commits with details |
+| `/recap` | Full overview: today, week, month, year, all time |
+| `/recap-week` | What you shipped this week |
 | `/recap-month` | This month's themes and biggest projects |
-| `/recap-year` | This year's stats and arcs |
+| `/recap-year` | Your year as a builder |
 | `/recap-all` | Your entire coding history on this machine |
+| `/recap-story` | Your developer origin story from lifetime git history |
+| `/recap-diff` | Compare two time periods side by side (e.g., 2024 vs 2025) |
 
 ## How it works
 
-Recap discovers git repos across your filesystem, reads `git log` for each one, computes stats and streaks, and outputs structured text that Claude turns into a warm, personal narrative. No data leaves your machine. No API keys needed. Everything runs locally.
+Each command tells Claude to run `git log` across all repos on your machine, then narrate what it finds. Claude does the scanning, the analysis, and the storytelling. The commands are just prompts with embedded shell scripts.
 
-## Upcoming
+- Scans `~`, `~/repos`, `~/src`, `~/code`, `~/projects`, `~/Developer` for git repos
+- Filters by your `git config user.email`
+- Skips `node_modules`, `.cache`, `vendor`, `Library`
+- Everything runs locally. Nothing leaves your machine.
 
-- **`recap story`** — developer origin story. Reads your lifetime git history and generates a narrative of your evolution as a builder.
-- **`recap diff 2023 2024`** — year-over-year comparison. Compare languages, repos, commit frequency, and see what changed.
-- **Homebrew tap** — `brew install recap` for a more natural macOS install path.
+## License
+
+MIT
