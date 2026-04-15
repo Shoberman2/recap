@@ -3,6 +3,8 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![CI](https://github.com/Shoberman2/recap/actions/workflows/ci.yml/badge.svg)](https://github.com/Shoberman2/recap/actions/workflows/ci.yml)
 [![Works with Claude Code](https://img.shields.io/badge/works%20with-Claude%20Code-blueviolet)](https://claude.ai/code)
+[![GitHub stars](https://img.shields.io/github/stars/Shoberman2/recap?style=social)](https://github.com/Shoberman2/recap)
+[![GitHub Discussions](https://img.shields.io/github/discussions/Shoberman2/recap)](https://github.com/Shoberman2/recap/discussions)
 
 Slash commands for [Claude Code](https://claude.ai/code) that recap everything you've built on your laptop. Type `/recap` and Claude scans your git repos and tells you what you shipped.
 
@@ -45,7 +47,9 @@ Each command tells Claude to run `git log` across all repos on your machine, the
 
 Run `/recap-story` and post a screenshot — we'd love to see what you've built.
 
-Tag **#devrecap** on Twitter/X.
+[**Tweet your recap**](https://twitter.com/intent/tweet?text=Just%20ran%20%2Frecap%20in%20Claude%20Code%20and%20got%20a%20narrated%20story%20of%20everything%20I%27ve%20built.%20Wild.%20%23devrecap&url=https%3A%2F%2Fgithub.com%2FShoberman2%2Frecap) | Tag **#devrecap** on Twitter/X
+
+Share and discuss recaps in [GitHub Discussions](https://github.com/Shoberman2/recap/discussions).
 
 ## Contributing
 
