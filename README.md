@@ -27,6 +27,7 @@ That's it. Open Claude Code and type `/recap`.
 | `/recap-all` | Your entire coding history on this machine |
 | `/recap-story` | Your developer origin story from lifetime git history |
 | `/recap-diff` | Compare two time periods side by side (e.g., 2024 vs 2025) |
+| `/recap-session` | Recap the current Claude Code session |
 
 ## How it works
 
